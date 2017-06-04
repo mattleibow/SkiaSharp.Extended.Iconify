@@ -1,0 +1,29 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IconifyGenerator", "IconifyGenerator\IconifyGenerator.csproj", "{6BBB9C70-FCAF-4676-8600-03DE52F5341E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkiaSharp.Extended.Iconify", "SkiaSharp.Extended.Iconify\SkiaSharp.Extended.Iconify.csproj", "{B32E4823-D151-4A32-8C25-914BC7FB7B2C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkiaSharp.Extended.Iconify.FontAwesome", "SkiaSharp.Extended.Iconify.FontAwesome\SkiaSharp.Extended.Iconify.FontAwesome.csproj", "{D74CA2AC-F45F-4E6A-9830-E9A9135E4D76}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6BBB9C70-FCAF-4676-8600-03DE52F5341E}.Debug|x86.ActiveCfg = Debug|x86
+		{6BBB9C70-FCAF-4676-8600-03DE52F5341E}.Debug|x86.Build.0 = Debug|x86
+		{6BBB9C70-FCAF-4676-8600-03DE52F5341E}.Release|x86.ActiveCfg = Release|x86
+		{6BBB9C70-FCAF-4676-8600-03DE52F5341E}.Release|x86.Build.0 = Release|x86
+		{B32E4823-D151-4A32-8C25-914BC7FB7B2C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B32E4823-D151-4A32-8C25-914BC7FB7B2C}.Debug|x86.Build.0 = Debug|Any CPU
+		{B32E4823-D151-4A32-8C25-914BC7FB7B2C}.Release|x86.ActiveCfg = Release|Any CPU
+		{B32E4823-D151-4A32-8C25-914BC7FB7B2C}.Release|x86.Build.0 = Release|Any CPU
+		{D74CA2AC-F45F-4E6A-9830-E9A9135E4D76}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D74CA2AC-F45F-4E6A-9830-E9A9135E4D76}.Debug|x86.Build.0 = Debug|Any CPU
+		{D74CA2AC-F45F-4E6A-9830-E9A9135E4D76}.Release|x86.ActiveCfg = Release|Any CPU
+		{D74CA2AC-F45F-4E6A-9830-E9A9135E4D76}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
