@@ -52,9 +52,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\..\externals\FontAwesome\fontawesome-webfont.ttf">
-      <Link>fontawesome-webfont.ttf</Link>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SkiaSharp">

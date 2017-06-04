@@ -1,13 +1,16 @@
 var target = Argument("target", "Default");
 
-var FontAwesomeVersion = "v4.7.0";
-var FontAwesomeStyleUrl = string.Format("https://raw.githubusercontent.com/FortAwesome/Font-Awesome/{0}/css/font-awesome.min.css", FontAwesomeVersion);
-var FontAwesomeFontUrl = string.Format("https://raw.githubusercontent.com/FortAwesome/Font-Awesome/{0}/fonts/fontawesome-webfont.ttf", FontAwesomeVersion);
+var FontAwesomeVersion = "4.7.0";
+var FontAwesomeStyleUrl = string.Format("https://raw.githubusercontent.com/FortAwesome/Font-Awesome/v{0}/css/font-awesome.min.css", FontAwesomeVersion);
+var FontAwesomeFontUrl = string.Format("https://raw.githubusercontent.com/FortAwesome/Font-Awesome/v{0}/fonts/fontawesome-webfont.ttf", FontAwesomeVersion);
+
 
 Task("Externals")
     .Does(() =>
 {
     // download all the styles
+
+    // FontAwesome
     EnsureDirectoryExists("./externals/FontAwesome/");
     if (!FileExists("./externals/FontAwesome/font-awesome.min.css")) DownloadFile(FontAwesomeStyleUrl, "./externals/FontAwesome/font-awesome.min.css");
     if (!FileExists("./externals/FontAwesome/fontawesome-webfont.ttf")) DownloadFile(FontAwesomeFontUrl, "./externals/FontAwesome/fontawesome-webfont.ttf");
