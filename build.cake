@@ -72,7 +72,7 @@ Task("Build")
     EnsureDirectoryExists("./output/");
     CopyFileToDirectory("./source/SkiaSharp.Extended.Iconify/bin/Release/SkiaSharp.Extended.Iconify.dll", "./output/");
     CopyFileToDirectory("./source/SkiaSharp.Extended.Iconify.FontAwesome/bin/Release/SkiaSharp.Extended.Iconify.FontAwesome.dll", "./output/");
-    CopyFileToDirectory("./source/SkiaSharp.Extended.Iconify.FontAwesome/bin/Release/SkiaSharp.Extended.Iconify.IonIcons.dll", "./output/");
+    CopyFileToDirectory("./source/SkiaSharp.Extended.Iconify.IonIcons/bin/Release/SkiaSharp.Extended.Iconify.IonIcons.dll", "./output/");
 });
 
 Task("Clean")
