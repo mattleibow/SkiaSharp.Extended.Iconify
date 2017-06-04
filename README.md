@@ -13,7 +13,9 @@ needed doing. But, not anymore.
 
 First, we can use nice templated strings:
 
-    var text = "I {{fa-heart-o color=ff0000}} to {{fa-code}} on {{fa-windows color=1BA1E2}}!";
+```csharp
+var text = "I {{fa-heart-o color=ff0000}} to {{fa-code}} on {{fa-windows color=1BA1E2}}!";
+```
 
 There are a few things that make this work:
  - The `{{...}}` double curly braces tell the engine that this is a 
@@ -31,19 +33,23 @@ More optional flags may be added later, but right now there is just the
 To draw this text, all we have to do is create a lookup table. At this
 time, we just have FontAwesome, but more can be added later:
 
-    // create the lookup table
-    var lookup = new SKTextRunLookup();
+```csharp
+// create the lookup table
+var lookup = new SKTextRunLookup();
 
-    // add FontAwesome
-    FontAwesome.AddTo(lookup);
+// add FontAwesome
+FontAwesome.AddTo(lookup);
+```
 
 Now that we have our table, we can draw the string:
 
-    // create the paint that represents the default text
-    var paint = new SKPaint();
+```csharp
+// create the paint that represents the default text
+var paint = new SKPaint();
 
-    // draw the text, inserting all the FontAwesome characters
-    canvas.DrawIconifiedText(text, 10, 100, lookup, paint);
+// draw the text, inserting all the FontAwesome characters
+canvas.DrawIconifiedText(text, 10, 100, lookup, paint);
+```
 
 The lookup table can be re-used, even using just a single table 
 across the entire app.
@@ -54,21 +60,25 @@ control the creation of these strings:
 Instead of just passing a string to `DrawIconifiedText`, we can
 "cache" or pre-calculate this string using `SKTextRun`:
 
-    // create the text runs
-    IEnumerable<SKTextRun> runs = SKTextRun.Create(text, lookup);
+```csharp
+// create the text runs
+IEnumerable<SKTextRun> runs = SKTextRun.Create(text, lookup);
 
-    // draw the text
-    canvas.DrawText(runs, 10, 100, paint);
+// draw the text
+canvas.DrawText(runs, 10, 100, paint);
+```
 
 Another way to work with this is to directly create the text runs:
 
-    var runs = new [] {
-        new SKTextRun("I "),
-        new SKTextRun("\uf08a") {
-            Color = SKColors.Red,
-            Typeface = SKTypeface.FromFamilyName("FontAwesome"),
-            TextSize = 50
-        },
-        new SKTextRun(" to "),
-        // ...
-    };
+```csharp
+var runs = new [] {
+    new SKTextRun("I "),
+    new SKTextRun("\uf08a") {
+        Color = SKColors.Red,
+        Typeface = SKTypeface.FromFamilyName("FontAwesome"),
+        TextSize = 50
+    },
+    new SKTextRun(" to "),
+    // ...
+};
+```
