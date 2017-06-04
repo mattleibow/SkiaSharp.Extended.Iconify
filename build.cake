@@ -4,6 +4,10 @@ var FontAwesomeVersion = "4.7.0";
 var FontAwesomeStyleUrl = string.Format("https://raw.githubusercontent.com/FortAwesome/Font-Awesome/v{0}/css/font-awesome.min.css", FontAwesomeVersion);
 var FontAwesomeFontUrl = string.Format("https://raw.githubusercontent.com/FortAwesome/Font-Awesome/v{0}/fonts/fontawesome-webfont.ttf", FontAwesomeVersion);
 
+// var EntypoUrl = "https://dl.dropboxusercontent.com/u/4339492/entypo.zip";
+
+var IonIconsVersion = "2.0.1";
+var IonIconsUrl = string.Format("https://github.com/driftyco/ionicons/archive/v{0}.zip", IonIconsVersion);
 
 Task("Externals")
     .Does(() =>
@@ -14,6 +18,20 @@ Task("Externals")
     EnsureDirectoryExists("./externals/FontAwesome/");
     if (!FileExists("./externals/FontAwesome/font-awesome.min.css")) DownloadFile(FontAwesomeStyleUrl, "./externals/FontAwesome/font-awesome.min.css");
     if (!FileExists("./externals/FontAwesome/fontawesome-webfont.ttf")) DownloadFile(FontAwesomeFontUrl, "./externals/FontAwesome/fontawesome-webfont.ttf");
+
+    // // Entypo
+    // EnsureDirectoryExists("./externals/Entypo/");
+    // if (!FileExists("./externals/Entypo/Entypo.zip")) DownloadFile(EntypoUrl, "./externals/Entypo/Entypo.zip");
+    // Unzip("./externals/Entypo/Entypo.zip", "./externals/Entypo/Entypo/");
+
+    // IonIcons
+    EnsureDirectoryExists("./externals/IonIcons/");
+    if (!FileExists("./externals/IonIcons/IonIcons.zip")) DownloadFile(IonIconsUrl, "./externals/IonIcons/IonIcons.zip");
+    if (!DirectoryExists("./externals/IonIcons/IonIcons")) {
+        Unzip("./externals/IonIcons/IonIcons.zip", "./externals/IonIcons/");
+        MoveDirectory("./externals/IonIcons/ionicons-" + IonIconsVersion, "./externals/IonIcons/IonIcons");
+    }
+
 });
 
 Task("Build")
@@ -44,6 +62,7 @@ Task("Build")
 
     // then, run the generator on the styles
     GenerateIconifySource("externals/FontAwesome/font-awesome.min.css", "FontAwesome");
+    GenerateIconifySource("externals/IonIcons/IonIcons/css/ionicons.min.css", "IonIcons");
 
     // now build the libraries
     NuGetRestore("./source/SkiaSharp.Extended.Iconify.sln");
@@ -53,6 +72,7 @@ Task("Build")
     EnsureDirectoryExists("./output/");
     CopyFileToDirectory("./source/SkiaSharp.Extended.Iconify/bin/Release/SkiaSharp.Extended.Iconify.dll", "./output/");
     CopyFileToDirectory("./source/SkiaSharp.Extended.Iconify.FontAwesome/bin/Release/SkiaSharp.Extended.Iconify.FontAwesome.dll", "./output/");
+    CopyFileToDirectory("./source/SkiaSharp.Extended.Iconify.FontAwesome/bin/Release/SkiaSharp.Extended.Iconify.IonIcons.dll", "./output/");
 });
 
 Task("Clean")

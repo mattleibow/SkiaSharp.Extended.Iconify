@@ -23,7 +23,8 @@ namespace SkiaSharpDemo
 
 			canvas.Clear(SKColors.White);
 
-			var text = "I {{fa-heart-o color=ff0000}} to {{fa-code}} on {{fa-windows color=1BA1E2}}!";
+			var fontAwesome = "I {{fa-heart-o color=ff0000}} to {{fa-code}} on {{fa-windows color=1BA1E2}}!";
+			var ionIcons = "{{ion-ios-cloud-download-outline color=0000ff}} the SkiaSharp source from {{ion-social-github}}.";
 
 			using (var lookup = new SKTextRunLookup())
 			using (var textPaint = new SKPaint())
@@ -31,6 +32,7 @@ namespace SkiaSharpDemo
 				// the lookup does not have to be re-created on each draw
 				// instead, it can be created and re-used
 				FontAwesome.AddTo(lookup);
+				IonIcons.AddTo(lookup);
 
 				textPaint.IsAntialias = true;
 				textPaint.TextSize = 75;
@@ -40,7 +42,10 @@ namespace SkiaSharpDemo
 				// it may be better to cache this using the:
 				//     var runs = SKTextRun.Create(text, lookup);
 				// and then drawing it using the DrawText method.
-				canvas.DrawIconifiedText(text, 25, 25 + textPaint.TextSize, lookup, textPaint);
+				var yOffset = 25 + textPaint.TextSize;
+				canvas.DrawIconifiedText(fontAwesome, 25, yOffset, lookup, textPaint);
+				yOffset += 12 + textPaint.TextSize;
+				canvas.DrawIconifiedText(ionIcons, 25, yOffset, lookup, textPaint);
 			}
 		}
 	}

@@ -87,6 +87,10 @@
       <Project>{D74CA2AC-F45F-4E6A-9830-E9A9135E4D76}</Project>
       <Name>SkiaSharp.Extended.Iconify.FontAwesome</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\source\SkiaSharp.Extended.Iconify.IonIcons\SkiaSharp.Extended.Iconify.IonIcons.csproj">
+      <Project>{14A21586-B844-4955-9E17-90968EE71FFD}</Project>
+      <Name>SkiaSharp.Extended.Iconify.IonIcons</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />

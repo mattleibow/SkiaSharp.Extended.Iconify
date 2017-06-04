@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkiaSharp.Extended.Iconify"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkiaSharp.Extended.Iconify.FontAwesome", "SkiaSharp.Extended.Iconify.FontAwesome\SkiaSharp.Extended.Iconify.FontAwesome.csproj", "{D74CA2AC-F45F-4E6A-9830-E9A9135E4D76}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkiaSharp.Extended.Iconify.IonIcons", "SkiaSharp.Extended.Iconify.IonIcons\SkiaSharp.Extended.Iconify.IonIcons.csproj", "{14A21586-B844-4955-9E17-90968EE71FFD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,5 +21,9 @@ Global
 		{D74CA2AC-F45F-4E6A-9830-E9A9135E4D76}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D74CA2AC-F45F-4E6A-9830-E9A9135E4D76}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D74CA2AC-F45F-4E6A-9830-E9A9135E4D76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14A21586-B844-4955-9E17-90968EE71FFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14A21586-B844-4955-9E17-90968EE71FFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14A21586-B844-4955-9E17-90968EE71FFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14A21586-B844-4955-9E17-90968EE71FFD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
