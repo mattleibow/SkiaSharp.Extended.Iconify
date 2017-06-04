@@ -19,6 +19,9 @@ var MaterialIconsFontUrl = string.Format("https://github.com/google/material-des
 
 var MeteoconsUrl = "http://www.alessioatzeni.com/meteocons/res/download/meteocons-font.zip";
 
+var SimpleLineIconsVersion = "2.4.1";
+var SimpleLineIconsUrl = string.Format("https://github.com/thesabbir/simple-line-icons/archive/{0}.zip", SimpleLineIconsVersion);
+
 Task("Externals")
     .Does(() =>
 {
@@ -59,12 +62,21 @@ Task("Externals")
     if (!FileExists("./externals/MaterialIcons/MaterialIcons-Regular.ttf"))
         DownloadFile(MaterialIconsFontUrl, "./externals/MaterialIcons/MaterialIcons-Regular.ttf");
 
-    // MeteoconsUrl
+    // Meteocons
     EnsureDirectoryExists("./externals/Meteocons/");
     if (!FileExists("./externals/Meteocons/meteocons-font.zip"))
         DownloadFile(MeteoconsUrl, "./externals/Meteocons/meteocons-font.zip");
     if (!FileExists("./externals/Meteocons/meteocons-font/FONT/Font-face/meteocons-webfont.ttf"))
         Unzip("./externals/Meteocons/meteocons-font.zip", "./externals/Meteocons/");
+
+    // SimpleLineIcons
+    EnsureDirectoryExists("./externals/SimpleLineIcons/");
+    if (!FileExists("./externals/SimpleLineIcons/SimpleLineIcons.zip"))
+        DownloadFile(SimpleLineIconsUrl, "./externals/SimpleLineIcons/SimpleLineIcons.zip");
+    if (!FileExists("./externals/SimpleLineIcons/SimpleLineIcons/fonts/Simple-Line-Icons.ttf")) {
+        Unzip("./externals/SimpleLineIcons/SimpleLineIcons.zip", "./externals/SimpleLineIcons/");
+        MoveDirectory("./externals/SimpleLineIcons/simple-line-icons-" + SimpleLineIconsVersion, "./externals/SimpleLineIcons/SimpleLineIcons");
+    }
 });
 
 Task("Build")
@@ -99,6 +111,7 @@ Task("Build")
     GenerateIconifySource("externals/IonIcons/IonIcons/css/ionicons.min.css", "IonIcons", "css");
     GenerateIconifySource("externals/MaterialDesignIcons/materialdesignicons.min.css", "MaterialDesignIcons", "css");
     GenerateIconifySource("externals/MaterialIcons/codepoints", "MaterialIcons", "codepoints");
+    GenerateIconifySource("externals/SimpleLineIcons/SimpleLineIcons/css/simple-line-icons.css", "SimpleLineIcons", "css");
 
     // now build the libraries
     NuGetRestore("./source/SkiaSharp.Extended.Iconify.sln");
@@ -112,6 +125,7 @@ Task("Build")
     CopyFileToDirectory("./source/SkiaSharp.Extended.Iconify.MaterialDesignIcons/bin/Release/SkiaSharp.Extended.Iconify.MaterialDesignIcons.dll", "./output/");
     CopyFileToDirectory("./source/SkiaSharp.Extended.Iconify.MaterialIcons/bin/Release/SkiaSharp.Extended.Iconify.MaterialIcons.dll", "./output/");
     CopyFileToDirectory("./source/SkiaSharp.Extended.Iconify.Meteocons/bin/Release/SkiaSharp.Extended.Iconify.Meteocons.dll", "./output/");
+    CopyFileToDirectory("./source/SkiaSharp.Extended.Iconify.SimpleLineIcons/bin/Release/SkiaSharp.Extended.Iconify.SimpleLineIcons.dll", "./output/");
 });
 
 Task("Clean")
