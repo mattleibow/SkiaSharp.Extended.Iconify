@@ -4,13 +4,13 @@ using System.Reflection;
 
 namespace SkiaSharp.Extended.Iconify
 {
-	public static partial class MatrialDesignIcons
+	public static partial class MaterialDesignIcons
 	{
 		public const string ManifestResourceName = "SkiaSharp.Extended.Iconify.materialdesignicons-webfont.ttf";
 
 		public static Stream GetFontStream()
 		{
-			var type = typeof(MatrialDesignIcons).GetTypeInfo();
+			var type = typeof(MaterialDesignIcons).GetTypeInfo();
 			var assembly = type.Assembly;
 
 			return assembly.GetManifestResourceStream(ManifestResourceName);

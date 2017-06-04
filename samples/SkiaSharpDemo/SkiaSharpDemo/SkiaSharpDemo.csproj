@@ -91,9 +91,9 @@
       <Project>{14A21586-B844-4955-9E17-90968EE71FFD}</Project>
       <Name>SkiaSharp.Extended.Iconify.IonIcons</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\source\SkiaSharp.Extended.Iconify.MatrialDesignIcons\SkiaSharp.Extended.Iconify.MatrialDesignIcons.csproj">
+    <ProjectReference Include="..\..\..\source\SkiaSharp.Extended.Iconify.MaterialDesignIcons\SkiaSharp.Extended.Iconify.MaterialDesignIcons.csproj">
       <Project>{E4E220CE-0F9E-4963-9ECF-43F13B8DE8D0}</Project>
-      <Name>SkiaSharp.Extended.Iconify.MatrialDesignIcons</Name>
+      <Name>SkiaSharp.Extended.Iconify.MaterialDesignIcons</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

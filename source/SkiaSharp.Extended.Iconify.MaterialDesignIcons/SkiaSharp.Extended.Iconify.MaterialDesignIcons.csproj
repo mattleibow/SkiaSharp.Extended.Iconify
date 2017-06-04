@@ -8,7 +8,7 @@
     <UseMSBuildEngine>true</UseMSBuildEngine>
     <OutputType>Library</OutputType>
     <RootNamespace>SkiaSharp.Extended.Iconify</RootNamespace>
-    <AssemblyName>SkiaSharp.Extended.Iconify.MatrialDesignIcons</AssemblyName>
+    <AssemblyName>SkiaSharp.Extended.Iconify.MaterialDesignIcons</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Profile111</TargetFrameworkProfile>
   </PropertyGroup>
@@ -29,13 +29,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MatrialDesignIcons.cs" />
-    <Compile Include="..\..\externals\MatrialDesignIcons\MatrialDesignIcons.generated.cs">
-      <Link>MatrialDesignIcons.generated.cs</Link>
+    <Compile Include="MaterialDesignIcons.cs" />
+    <Compile Include="..\..\externals\MaterialDesignIcons\MaterialDesignIcons.generated.cs">
+      <Link>MaterialDesignIcons.generated.cs</Link>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="..\..\externals\MatrialDesignIcons\materialdesignicons-webfont.ttf">
+    <EmbeddedResource Include="..\..\externals\MaterialDesignIcons\materialdesignicons-webfont.ttf">
       <Link>materialdesignicons-webfont.ttf</Link>
     </EmbeddedResource>
   </ItemGroup>

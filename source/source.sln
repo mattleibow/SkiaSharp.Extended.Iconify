@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkiaSharp.Extended.Iconify.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkiaSharp.Extended.Iconify.IonIcons", "SkiaSharp.Extended.Iconify.IonIcons\SkiaSharp.Extended.Iconify.IonIcons.csproj", "{14A21586-B844-4955-9E17-90968EE71FFD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkiaSharp.Extended.Iconify.MatrialDesignIcons", "SkiaSharp.Extended.Iconify.MatrialDesignIcons\SkiaSharp.Extended.Iconify.MatrialDesignIcons.csproj", "{E4E220CE-0F9E-4963-9ECF-43F13B8DE8D0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkiaSharp.Extended.Iconify.MaterialDesignIcons", "SkiaSharp.Extended.Iconify.MaterialDesignIcons\SkiaSharp.Extended.Iconify.MaterialDesignIcons.csproj", "{E4E220CE-0F9E-4963-9ECF-43F13B8DE8D0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

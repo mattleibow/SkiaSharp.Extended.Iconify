@@ -25,7 +25,7 @@ namespace SkiaSharpDemo
 
 			var fontAwesome = "I {{fa-heart-o color=ff0000}} to {{fa-code}} on {{fa-windows color=1BA1E2}}!";
 			var ionIcons = "{{ion-ios-cloud-download-outline color=0000ff}} the SkiaSharp source from {{ion-social-github}}.";
-			var matrialDesignIcons = "SkiaSharp works on {{mdi-apple}}, {{mdi-android}}, {{mdi-windows}} and {{mdi-linux}}!";
+			var materialDesignIcons = "SkiaSharp works on {{mdi-apple}}, {{mdi-android}}, {{mdi-windows}} and {{mdi-linux}}!";
 
 			using (var lookup = new SKTextRunLookup())
 			using (var textPaint = new SKPaint())
@@ -34,7 +34,7 @@ namespace SkiaSharpDemo
 				// instead, it can be created and re-used
 				FontAwesome.AddTo(lookup);
 				IonIcons.AddTo(lookup);
-				MatrialDesignIcons.AddTo(lookup);
+				MaterialDesignIcons.AddTo(lookup);
 
 				textPaint.IsAntialias = true;
 				textPaint.TextSize = 75;
@@ -49,7 +49,7 @@ namespace SkiaSharpDemo
 				yOffset += 12 + textPaint.TextSize;
 				canvas.DrawIconifiedText(ionIcons, 25, yOffset, lookup, textPaint);
 				yOffset += 12 + textPaint.TextSize;
-				canvas.DrawIconifiedText(matrialDesignIcons, 25, yOffset, lookup, textPaint);
+				canvas.DrawIconifiedText(materialDesignIcons, 25, yOffset, lookup, textPaint);
 			}
 		}
 	}
