@@ -25,7 +25,8 @@ namespace SkiaSharpDemo
 
 			var fontAwesome = "I {{fa-heart-o color=ff0000}} to {{fa-code}} on {{fa-windows color=1BA1E2}}!";
 			var ionIcons = "{{ion-ios-cloud-download-outline color=0000ff}} the SkiaSharp source from {{ion-social-github}}.";
-			var materialDesignIcons = "SkiaSharp works on {{mdi-apple}}, {{mdi-android}}, {{mdi-windows}} and {{mdi-linux}}!";
+			var materialDesignIcons = "SkiaSharp works on {{mdi-apple}}, {{mdi-android color=a4c639}}, {{mdi-windows}} and {{mdi-linux}}!";
+			var materialIcons = "SkiaSharp supports {{brush}} and {{photo color=006400}}!";
 
 			using (var lookup = new SKTextRunLookup())
 			using (var textPaint = new SKPaint())
@@ -35,6 +36,7 @@ namespace SkiaSharpDemo
 				FontAwesome.AddTo(lookup);
 				IonIcons.AddTo(lookup);
 				MaterialDesignIcons.AddTo(lookup);
+				MaterialIcons.AddTo(lookup);
 
 				textPaint.IsAntialias = true;
 				textPaint.TextSize = 75;
@@ -44,12 +46,20 @@ namespace SkiaSharpDemo
 				// it may be better to cache this using the:
 				//     var runs = SKTextRun.Create(text, lookup);
 				// and then drawing it using the DrawText method.
-				var yOffset = 25 + textPaint.TextSize;
-				canvas.DrawIconifiedText(fontAwesome, 25, yOffset, lookup, textPaint);
-				yOffset += 12 + textPaint.TextSize;
-				canvas.DrawIconifiedText(ionIcons, 25, yOffset, lookup, textPaint);
-				yOffset += 12 + textPaint.TextSize;
-				canvas.DrawIconifiedText(materialDesignIcons, 25, yOffset, lookup, textPaint);
+				var padding = 24;
+				var yOffset = padding + textPaint.TextSize;
+
+				canvas.DrawIconifiedText(fontAwesome, padding, yOffset, lookup, textPaint);
+				yOffset += padding + textPaint.TextSize;
+
+				canvas.DrawIconifiedText(ionIcons, padding, yOffset, lookup, textPaint);
+				yOffset += padding + textPaint.TextSize;
+
+				canvas.DrawIconifiedText(materialDesignIcons, padding, yOffset, lookup, textPaint);
+				yOffset += padding + textPaint.TextSize;
+
+				canvas.DrawIconifiedText(materialIcons, padding, yOffset, lookup, textPaint);
+				yOffset += padding + textPaint.TextSize;
 			}
 		}
 	}

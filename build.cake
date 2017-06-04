@@ -13,6 +13,10 @@ var MaterialDesignIconsVersion = "1.9.32";
 var MaterialDesignIconsStyleUrl = string.Format("http://cdn.materialdesignicons.com/{0}/css/materialdesignicons.min.css", MaterialDesignIconsVersion);
 var MaterialDesignIconsFontUrl = string.Format("http://cdn.materialdesignicons.com/{0}/fonts/materialdesignicons-webfont.ttf", MaterialDesignIconsVersion);
 
+var MaterialIconsVersion = "3.0.1";
+var MaterialIconsStyleUrl = string.Format("https://raw.githubusercontent.com/google/material-design-icons/{0}/iconfont/codepoints", MaterialIconsVersion);
+var MaterialIconsFontUrl = string.Format("https://github.com/google/material-design-icons/raw/{0}/iconfont/MaterialIcons-Regular.ttf", MaterialIconsVersion);
+
 Task("Externals")
     .Does(() =>
 {
@@ -45,19 +49,27 @@ Task("Externals")
         DownloadFile(MaterialDesignIconsStyleUrl, "./externals/MaterialDesignIcons/materialdesignicons.min.css");
     if (!FileExists("./externals/MaterialDesignIcons/materialdesignicons-webfont.ttf"))
         DownloadFile(MaterialDesignIconsFontUrl, "./externals/MaterialDesignIcons/materialdesignicons-webfont.ttf");
+
+    // MaterialIcons
+    EnsureDirectoryExists("./externals/MaterialIcons/");
+    if (!FileExists("./externals/MaterialIcons/codepoints"))
+        DownloadFile(MaterialIconsStyleUrl, "./externals/MaterialIcons/codepoints");
+    if (!FileExists("./externals/MaterialIcons/MaterialIcons-Regular.ttf"))
+        DownloadFile(MaterialIconsFontUrl, "./externals/MaterialIcons/MaterialIcons-Regular.ttf");
 });
 
 Task("Build")
     .IsDependentOn("Externals")
     .Does(() =>
 {
-    var GenerateIconifySource = new Action<FilePath, string>((stylesheet, type) => {
+    var GenerateIconifySource = new Action<FilePath, string, string>((stylesheet, type, codepointType) => {
         var iconify = MakeAbsolute((FilePath)"./output/IconifyGenerator/iconify.exe");
         var iconifyResult = StartProcess(iconify, new ProcessSettings {
             Arguments = new ProcessArgumentBuilder()
                 .AppendSwitchQuoted("-o", "=", stylesheet.GetDirectory().CombineWithFilePath(type + ".generated.cs").FullPath)
                 .AppendSwitchQuoted("-n", "SkiaSharp.Extended.Iconify")
                 .AppendSwitchQuoted("-t", type)
+                .AppendSwitchQuoted("-c", "=", codepointType)
                 .AppendQuoted(stylesheet.FullPath)
         });
         if (iconifyResult != 0) {
@@ -74,9 +86,10 @@ Task("Build")
     CopyDirectory("./source/IconifyGenerator/bin/Release", "./output/IconifyGenerator/");
 
     // then, run the generator on the styles
-    GenerateIconifySource("externals/FontAwesome/font-awesome.min.css", "FontAwesome");
-    GenerateIconifySource("externals/IonIcons/IonIcons/css/ionicons.min.css", "IonIcons");
-    GenerateIconifySource("externals/MaterialDesignIcons/materialdesignicons.min.css", "MaterialDesignIcons");
+    GenerateIconifySource("externals/FontAwesome/font-awesome.min.css", "FontAwesome", "css");
+    GenerateIconifySource("externals/IonIcons/IonIcons/css/ionicons.min.css", "IonIcons", "css");
+    GenerateIconifySource("externals/MaterialDesignIcons/materialdesignicons.min.css", "MaterialDesignIcons", "css");
+    GenerateIconifySource("externals/MaterialIcons/codepoints", "MaterialIcons", "codepoints");
 
     // now build the libraries
     NuGetRestore("./source/SkiaSharp.Extended.Iconify.sln");
@@ -88,6 +101,7 @@ Task("Build")
     CopyFileToDirectory("./source/SkiaSharp.Extended.Iconify.FontAwesome/bin/Release/SkiaSharp.Extended.Iconify.FontAwesome.dll", "./output/");
     CopyFileToDirectory("./source/SkiaSharp.Extended.Iconify.IonIcons/bin/Release/SkiaSharp.Extended.Iconify.IonIcons.dll", "./output/");
     CopyFileToDirectory("./source/SkiaSharp.Extended.Iconify.MaterialDesignIcons/bin/Release/SkiaSharp.Extended.Iconify.MaterialDesignIcons.dll", "./output/");
+    CopyFileToDirectory("./source/SkiaSharp.Extended.Iconify.MaterialIcons/bin/Release/SkiaSharp.Extended.Iconify.MaterialIcons.dll", "./output/");
 });
 
 Task("Clean")
