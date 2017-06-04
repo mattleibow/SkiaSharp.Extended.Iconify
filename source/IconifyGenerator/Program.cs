@@ -32,10 +32,17 @@ namespace {{inject-namespace}}
 		private const string CharacterTemplate =
 @"				{ ""{{inject-selector}}"", ""{{inject-value}}"" },";
 
+		private enum CodepointType
+		{
+			css,
+			codepoints
+		}
+
 		public static int Main(string[] args)
 		{
 			// defaults
 			string output = null;
+			var codepoint = CodepointType.css;
 			string injectNamespace = "MyNamespace";
 			string injectType = "MyType";
 			var showHelp = false;
@@ -45,6 +52,7 @@ namespace {{inject-namespace}}
 				{ "o|output:", "the output file name.", (string v) => output = v },
 				{ "n|namespace=", "the namespace to use.", (string v) => injectNamespace = v },
 				{ "t|type=", "the type name to use.", (string v) => injectType = v },
+				{ "c|codepoints:", "the type of codepoint file.", (CodepointType v) => codepoint = v },
 				{ "h|help",  "show this message and exit", v => showHelp = v != null },
 			};
 
@@ -74,7 +82,7 @@ namespace {{inject-namespace}}
 			stylesheet = MakeAbsolute(stylesheet);
 			if (!File.Exists(stylesheet))
 			{
-				Console.WriteLine("The specified stylesheet does not exist: " + stylesheet);
+				Console.WriteLine("The specified codepoint file does not exist: " + stylesheet);
 				return 1;
 			}
 
@@ -85,7 +93,7 @@ namespace {{inject-namespace}}
 			}
 
 			// process the template
-			var source = ProcessStyleSheet(stylesheet, injectNamespace, injectType);
+			var source = ProcessStyleSheet(stylesheet, injectNamespace, injectType, codepoint);
 
 			// write the source to disk
 			File.WriteAllText(output, source);
@@ -102,10 +110,49 @@ namespace {{inject-namespace}}
 			return Path.GetFullPath(path);
 		}
 
-		private static string ProcessStyleSheet(string cssPath, string injectNamespace, string injectType)
+		private static string ProcessStyleSheet(string codepointFile, string injectNamespace, string injectType, CodepointType codepoint)
 		{
 			var characters = new StringBuilder();
 
+			switch (codepoint)
+			{
+				case CodepointType.codepoints:
+					ParseCodepoints(codepointFile, characters);
+					break;
+				case CodepointType.css:
+				default:
+					ParseCssCodepoints(codepointFile, characters);
+					break;
+			}
+
+			// create the source file
+			return Template
+				.Replace("{{inject-namespace}}", injectNamespace)
+				.Replace("{{inject-type}}", injectType)
+				.Replace("{{inject-characters}}", characters.ToString());
+		}
+
+		private static void ParseCodepoints(string codepointsPath, StringBuilder characters)
+		{
+			var lines = File.ReadAllLines(codepointsPath);
+
+			foreach (var line in lines)
+			{
+				var pair = line.Split(' ');
+				if (pair.Length != 2)
+				{
+					continue;
+				}
+
+				var chars = CharacterTemplate
+					.Replace("{{inject-selector}}", pair[0])
+					.Replace("{{inject-value}}", "\\u" + pair[1]);
+				characters.AppendLine(chars);
+			}
+		}
+
+		private static void ParseCssCodepoints(string cssPath, StringBuilder characters)
+		{
 			var parser = new Parser();
 			var stylesheet = parser.Parse(File.ReadAllText(cssPath));
 			var rules = stylesheet.StyleRules;
@@ -148,12 +195,6 @@ namespace {{inject-namespace}}
 					characters.AppendLine(chars);
 				}
 			}
-
-			// create the source file
-			return Template
-				.Replace("{{inject-namespace}}", injectNamespace)
-				.Replace("{{inject-type}}", injectType)
-				.Replace("{{inject-characters}}", characters.ToString());
 		}
 
 		private static void ShowHelp(OptionSet p)
