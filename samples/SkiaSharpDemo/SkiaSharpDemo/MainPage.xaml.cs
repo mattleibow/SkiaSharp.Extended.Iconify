@@ -27,6 +27,7 @@ namespace SkiaSharpDemo
 			var ionIcons = "{{ion-ios-cloud-download-outline color=0000ff}} the SkiaSharp source from {{ion-social-github}}.";
 			var materialDesignIcons = "SkiaSharp works on {{mdi-apple}}, {{mdi-android color=a4c639}}, {{mdi-windows}} and {{mdi-linux}}!";
 			var materialIcons = "SkiaSharp supports {{brush}} and {{photo color=006400}}!";
+			var meteocons = "We love the {{mc-sun color=f9d71c}} and some {{mc-cloud-double-o}} s.";
 
 			using (var lookup = new SKTextRunLookup())
 			using (var textPaint = new SKPaint())
@@ -37,6 +38,7 @@ namespace SkiaSharpDemo
 				IonIcons.AddTo(lookup);
 				MaterialDesignIcons.AddTo(lookup);
 				MaterialIcons.AddTo(lookup);
+				Meteocons.AddTo(lookup);
 
 				textPaint.IsAntialias = true;
 				textPaint.TextSize = 75;
@@ -59,6 +61,9 @@ namespace SkiaSharpDemo
 				yOffset += padding + textPaint.TextSize;
 
 				canvas.DrawIconifiedText(materialIcons, padding, yOffset, lookup, textPaint);
+				yOffset += padding + textPaint.TextSize;
+
+				canvas.DrawIconifiedText(meteocons, padding, yOffset, lookup, textPaint);
 				yOffset += padding + textPaint.TextSize;
 			}
 		}

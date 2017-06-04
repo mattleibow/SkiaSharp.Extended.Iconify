@@ -17,6 +17,8 @@ var MaterialIconsVersion = "3.0.1";
 var MaterialIconsStyleUrl = string.Format("https://raw.githubusercontent.com/google/material-design-icons/{0}/iconfont/codepoints", MaterialIconsVersion);
 var MaterialIconsFontUrl = string.Format("https://github.com/google/material-design-icons/raw/{0}/iconfont/MaterialIcons-Regular.ttf", MaterialIconsVersion);
 
+var MeteoconsUrl = "http://www.alessioatzeni.com/meteocons/res/download/meteocons-font.zip";
+
 Task("Externals")
     .Does(() =>
 {
@@ -56,6 +58,13 @@ Task("Externals")
         DownloadFile(MaterialIconsStyleUrl, "./externals/MaterialIcons/codepoints");
     if (!FileExists("./externals/MaterialIcons/MaterialIcons-Regular.ttf"))
         DownloadFile(MaterialIconsFontUrl, "./externals/MaterialIcons/MaterialIcons-Regular.ttf");
+
+    // MeteoconsUrl
+    EnsureDirectoryExists("./externals/Meteocons/");
+    if (!FileExists("./externals/Meteocons/meteocons-font.zip"))
+        DownloadFile(MeteoconsUrl, "./externals/Meteocons/meteocons-font.zip");
+    if (!FileExists("./externals/Meteocons/meteocons-font/FONT/Font-face/meteocons-webfont.ttf"))
+        Unzip("./externals/Meteocons/meteocons-font.zip", "./externals/Meteocons/");
 });
 
 Task("Build")
@@ -102,6 +111,7 @@ Task("Build")
     CopyFileToDirectory("./source/SkiaSharp.Extended.Iconify.IonIcons/bin/Release/SkiaSharp.Extended.Iconify.IonIcons.dll", "./output/");
     CopyFileToDirectory("./source/SkiaSharp.Extended.Iconify.MaterialDesignIcons/bin/Release/SkiaSharp.Extended.Iconify.MaterialDesignIcons.dll", "./output/");
     CopyFileToDirectory("./source/SkiaSharp.Extended.Iconify.MaterialIcons/bin/Release/SkiaSharp.Extended.Iconify.MaterialIcons.dll", "./output/");
+    CopyFileToDirectory("./source/SkiaSharp.Extended.Iconify.Meteocons/bin/Release/SkiaSharp.Extended.Iconify.Meteocons.dll", "./output/");
 });
 
 Task("Clean")
