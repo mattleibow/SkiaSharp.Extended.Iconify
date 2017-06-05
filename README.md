@@ -104,8 +104,8 @@ var runs = new [] {
 
 ## Building
 
-Building SkiaSharp.Extended.Iconify just requires that [.NET Core][netcore] be 
-installed. Then, either open the solution `source/SkiaSharp.Extended.Iconify.sln`
+SkiaSharp.Extended.Iconify can be build using an IDE or command-line: 
+either open the solution `source/SkiaSharp.Extended.Iconify.sln`
 or run the build script:
 
 Mac/Linux:
