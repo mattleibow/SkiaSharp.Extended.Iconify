@@ -68,6 +68,8 @@ There are several icon fonts that are currently supported:
  - **WeatherIcons** - http://weathericons.io/
 
 These are just what we have now, but it is very simple to add some more.
+All we need is the `.ttf` font file and some mapping from a name to the
+unicode character.
 
 ## Advanced
 
