@@ -7,7 +7,8 @@ var FontAwesomeFontUrl = string.Format("https://raw.githubusercontent.com/FortAw
 // var EntypoUrl = "https://dl.dropboxusercontent.com/u/4339492/entypo.zip";
 
 var IonIconsVersion = "2.0.1";
-var IonIconsUrl = string.Format("https://github.com/driftyco/ionicons/archive/v{0}.zip", IonIconsVersion);
+var IonIconsStyleUrl = string.Format("https://raw.githubusercontent.com/ionic-team/ionicons/v{0}/css/ionicons.min.css", IonIconsVersion);
+var IonIconsFontUrl = string.Format("https://raw.githubusercontent.com/ionic-team/ionicons/v{0}/fonts/ionicons.ttf", IonIconsVersion);
 
 var MaterialDesignIconsVersion = "1.9.32";
 var MaterialDesignIconsStyleUrl = string.Format("http://cdn.materialdesignicons.com/{0}/css/materialdesignicons.min.css", MaterialDesignIconsVersion);
@@ -20,7 +21,8 @@ var MaterialIconsFontUrl = string.Format("https://github.com/google/material-des
 var MeteoconsUrl = "http://www.alessioatzeni.com/meteocons/res/download/meteocons-font.zip";
 
 var SimpleLineIconsVersion = "2.4.1";
-var SimpleLineIconsUrl = string.Format("https://github.com/thesabbir/simple-line-icons/archive/{0}.zip", SimpleLineIconsVersion);
+var SimpleLineIconsStyleUrl = string.Format("https://raw.githubusercontent.com/thesabbir/simple-line-icons/{0}/css/simple-line-icons.css", SimpleLineIconsVersion);
+var SimpleLineIconsFontUrl = string.Format("https://raw.githubusercontent.com/thesabbir/simple-line-icons/{0}/fonts/Simple-Line-Icons.ttf", SimpleLineIconsVersion);
 
 Task("Externals")
     .Does(() =>
@@ -41,12 +43,10 @@ Task("Externals")
 
     // IonIcons
     EnsureDirectoryExists("./externals/IonIcons/");
-    if (!FileExists("./externals/IonIcons/IonIcons.zip"))
-        DownloadFile(IonIconsUrl, "./externals/IonIcons/IonIcons.zip");
-    if (!DirectoryExists("./externals/IonIcons/IonIcons")) {
-        Unzip("./externals/IonIcons/IonIcons.zip", "./externals/IonIcons/");
-        MoveDirectory("./externals/IonIcons/ionicons-" + IonIconsVersion, "./externals/IonIcons/IonIcons");
-    }
+    if (!FileExists("./externals/IonIcons/ionicons.min.css"))
+        DownloadFile(IonIconsStyleUrl, "./externals/IonIcons/ionicons.min.css");
+    if (!FileExists("./externals/IonIcons/ionicons.ttf"))
+        DownloadFile(IonIconsFontUrl, "./externals/IonIcons/ionicons.ttf");
 
     // MaterialDesignIcons
     EnsureDirectoryExists("./externals/MaterialDesignIcons/");
@@ -71,12 +71,10 @@ Task("Externals")
 
     // SimpleLineIcons
     EnsureDirectoryExists("./externals/SimpleLineIcons/");
-    if (!FileExists("./externals/SimpleLineIcons/SimpleLineIcons.zip"))
-        DownloadFile(SimpleLineIconsUrl, "./externals/SimpleLineIcons/SimpleLineIcons.zip");
-    if (!FileExists("./externals/SimpleLineIcons/SimpleLineIcons/fonts/Simple-Line-Icons.ttf")) {
-        Unzip("./externals/SimpleLineIcons/SimpleLineIcons.zip", "./externals/SimpleLineIcons/");
-        MoveDirectory("./externals/SimpleLineIcons/simple-line-icons-" + SimpleLineIconsVersion, "./externals/SimpleLineIcons/SimpleLineIcons");
-    }
+    if (!FileExists("./externals/SimpleLineIcons/simple-line-icons.css"))
+        DownloadFile(SimpleLineIconsStyleUrl, "./externals/SimpleLineIcons/simple-line-icons.css");
+    if (!FileExists("./externals/SimpleLineIcons/Simple-Line-Icons.ttf"))
+        DownloadFile(SimpleLineIconsFontUrl, "./externals/SimpleLineIcons/Simple-Line-Icons.ttf");
 });
 
 Task("Build")
@@ -108,10 +106,10 @@ Task("Build")
 
     // then, run the generator on the styles
     GenerateIconifySource("externals/FontAwesome/font-awesome.min.css", "FontAwesome", "css");
-    GenerateIconifySource("externals/IonIcons/IonIcons/css/ionicons.min.css", "IonIcons", "css");
+    GenerateIconifySource("externals/IonIcons/ionicons.min.css", "IonIcons", "css");
     GenerateIconifySource("externals/MaterialDesignIcons/materialdesignicons.min.css", "MaterialDesignIcons", "css");
     GenerateIconifySource("externals/MaterialIcons/codepoints", "MaterialIcons", "codepoints");
-    GenerateIconifySource("externals/SimpleLineIcons/SimpleLineIcons/css/simple-line-icons.css", "SimpleLineIcons", "css");
+    GenerateIconifySource("externals/SimpleLineIcons/simple-line-icons.css", "SimpleLineIcons", "css");
 
     // now build the libraries
     NuGetRestore("./source/SkiaSharp.Extended.Iconify.sln");

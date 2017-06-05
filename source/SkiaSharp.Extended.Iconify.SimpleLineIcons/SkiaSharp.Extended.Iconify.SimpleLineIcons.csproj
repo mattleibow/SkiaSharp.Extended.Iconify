@@ -30,7 +30,7 @@
   <ItemGroup>
     <Compile Include="SimpleLineIcons.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="..\..\externals\SimpleLineIcons\SimpleLineIcons\css\SimpleLineIcons.generated.cs">
+    <Compile Include="..\..\externals\SimpleLineIcons\SimpleLineIcons.generated.cs">
       <Link>SimpleLineIcons.generated.cs</Link>
     </Compile>
   </ItemGroup>
@@ -49,7 +49,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="..\..\externals\SimpleLineIcons\SimpleLineIcons\fonts\Simple-Line-Icons.ttf">
+    <EmbeddedResource Include="..\..\externals\SimpleLineIcons\Simple-Line-Icons.ttf">
       <Link>Simple-Line-Icons.ttf</Link>
     </EmbeddedResource>
   </ItemGroup>

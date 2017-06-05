@@ -30,7 +30,7 @@
   <ItemGroup>
     <Compile Include="IonIcons.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="..\..\externals\IonIcons\IonIcons\css\IonIcons.generated.cs">
+    <Compile Include="..\..\externals\IonIcons\IonIcons.generated.cs">
       <Link>IonIcons.generated.cs</Link>
     </Compile>
   </ItemGroup>
@@ -49,7 +49,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="..\..\externals\IonIcons\IonIcons\fonts\ionicons.ttf">
+    <EmbeddedResource Include="..\..\externals\IonIcons\ionicons.ttf">
       <Link>ionicons.ttf</Link>
     </EmbeddedResource>
   </ItemGroup>
