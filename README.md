@@ -4,7 +4,7 @@ A simple way to draw a string that contains icons inline with normal
 characters.
 
 For example, if we wanted to draw this string using colored characters 
-from FontAwesome mixed in with other characters:
+from FontAwesome (or some other icon font) mixed in with other characters:
 
 ![FontAwesome](images/FontAwesome.png)
 
@@ -53,6 +53,22 @@ canvas.DrawIconifiedText(text, 10, 100, lookup, paint);
 
 The lookup table can be re-used, even using just a single table 
 across the entire app.
+
+## Supported Icon Fonts
+
+There are several icon fonts that are currently supported:
+
+ - **FontAwesome** - http://fontawesome.io/
+ - **IonIcons** - http://ionicons.com/
+ - **Material Design Icons** (community) - https://materialdesignicons.com/
+ - **Material Icons** (Google) - https://material.io/icons/
+ - **Meteocons** - http://www.alessioatzeni.com/meteocons/
+ - **Simple Line Icons** - http://simplelineicons.com/
+ - **Typicons** - http://www.typicons.com/
+
+These are just what we have now, but it is very simple to add some more.
+
+## Advanced
 
 For more advanced text substitutions, there is a way to directly 
 control the creation of these strings:
