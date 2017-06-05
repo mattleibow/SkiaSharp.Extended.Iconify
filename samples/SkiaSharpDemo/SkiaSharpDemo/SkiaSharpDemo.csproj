@@ -111,6 +111,10 @@
       <Project>{14A21586-B844-4955-9E17-90968EE71ABC}</Project>
       <Name>SkiaSharp.Extended.Iconify.Typicons</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\source\SkiaSharp.Extended.Iconify.WeatherIcons\SkiaSharp.Extended.Iconify.WeatherIcons.csproj">
+      <Project>{408778E6-355A-42D4-851C-7E327423A09D}</Project>
+      <Name>SkiaSharp.Extended.Iconify.WeatherIcons</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />

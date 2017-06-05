@@ -65,6 +65,7 @@ There are several icon fonts that are currently supported:
  - **Meteocons** - http://www.alessioatzeni.com/meteocons/
  - **Simple Line Icons** - http://simplelineicons.com/
  - **Typicons** - http://www.typicons.com/
+ - **WeatherIcons** - http://weathericons.io/
 
 These are just what we have now, but it is very simple to add some more.
 

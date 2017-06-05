@@ -1,3 +1,5 @@
+#addin "Cake.FileHelpers"
+
 var target = Argument("target", "Default");
 
 var FontAwesomeVersion = "4.7.0";
@@ -27,6 +29,11 @@ var SimpleLineIconsFontUrl = string.Format("https://raw.githubusercontent.com/th
 var TypiconsVersion = "2.0.9";
 var TypiconsStyleUrl = string.Format("https://raw.githubusercontent.com/stephenhutchings/typicons.font/v{0}/src/font/typicons.min.css", TypiconsVersion);
 var TypiconsFontUrl = string.Format("https://raw.githubusercontent.com/stephenhutchings/typicons.font/v{0}/src/font/typicons.ttf", TypiconsVersion);
+
+var WeatherIconsVersion = "2.0.10";
+var WeatherIconsStyleUrl = string.Format("https://raw.githubusercontent.com/erikflowers/weather-icons/{0}/css/weather-icons.min.css", WeatherIconsVersion);
+var WeatherIconsStyleWindUrl = string.Format("https://raw.githubusercontent.com/erikflowers/weather-icons/{0}/css/weather-icons-wind.min.css", WeatherIconsVersion);
+var WeatherIconsFontUrl = string.Format("https://raw.githubusercontent.com/erikflowers/weather-icons/{0}/font/weathericons-regular-webfont.ttf", WeatherIconsVersion);
 
 Task("Externals")
     .Does(() =>
@@ -86,6 +93,19 @@ Task("Externals")
         DownloadFile(TypiconsStyleUrl, "./externals/Typicons/typicons.min.css");
     if (!FileExists("./externals/Typicons/typicons.ttf"))
         DownloadFile(TypiconsFontUrl, "./externals/Typicons/typicons.ttf");
+
+    // WeatherIcons
+    EnsureDirectoryExists("./externals/WeatherIcons/");
+    if (!FileExists("./externals/WeatherIcons/weather-icons.min.css"))
+        DownloadFile(WeatherIconsStyleUrl, "./externals/WeatherIcons/weather-icons.min.css");
+    if (!FileExists("./externals/WeatherIcons/weather-icons-wind.min.css"))
+        DownloadFile(WeatherIconsStyleWindUrl, "./externals/WeatherIcons/weather-icons-wind.min.css");
+    if (!FileExists("./externals/WeatherIcons/weathericons-regular-webfont.ttf"))
+        DownloadFile(WeatherIconsFontUrl, "./externals/WeatherIcons/weathericons-regular-webfont.ttf");
+    if (!FileExists("./externals/WeatherIcons/weather-icons.css")) {
+        CopyFile("./externals/WeatherIcons/weather-icons.min.css", "./externals/WeatherIcons/weather-icons.css");
+        FileAppendText("./externals/WeatherIcons/weather-icons.css", FileReadText("./externals/WeatherIcons/weather-icons-wind.min.css"));
+    }
 });
 
 Task("Build")
@@ -122,6 +142,7 @@ Task("Build")
     GenerateIconifySource("externals/MaterialIcons/codepoints", "MaterialIcons", "codepoints");
     GenerateIconifySource("externals/SimpleLineIcons/simple-line-icons.css", "SimpleLineIcons", "css");
     GenerateIconifySource("externals/Typicons/typicons.min.css", "Typicons", "css");
+    GenerateIconifySource("externals/WeatherIcons/weather-icons.css", "WeatherIcons", "css");
 
     // now build the libraries
     NuGetRestore("./source/SkiaSharp.Extended.Iconify.sln");
@@ -137,6 +158,7 @@ Task("Build")
     CopyFileToDirectory("./source/SkiaSharp.Extended.Iconify.Meteocons/bin/Release/SkiaSharp.Extended.Iconify.Meteocons.dll", "./output/");
     CopyFileToDirectory("./source/SkiaSharp.Extended.Iconify.SimpleLineIcons/bin/Release/SkiaSharp.Extended.Iconify.SimpleLineIcons.dll", "./output/");
     CopyFileToDirectory("./source/SkiaSharp.Extended.Iconify.Typicons/bin/Release/SkiaSharp.Extended.Iconify.Typicons.dll", "./output/");
+    CopyFileToDirectory("./source/SkiaSharp.Extended.Iconify.WeatherIcons/bin/Release/SkiaSharp.Extended.Iconify.WeatherIcons.dll", "./output/");
 });
 
 Task("Clean")
