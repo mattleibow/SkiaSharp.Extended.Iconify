@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkiaSharp.Extended.Iconify.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkiaSharp.Extended.Iconify.SimpleLineIcons", "SkiaSharp.Extended.Iconify.SimpleLineIcons\SkiaSharp.Extended.Iconify.SimpleLineIcons.csproj", "{14A21586-B844-4955-9E17-90968EE71FCC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkiaSharp.Extended.Iconify.Typicons", "SkiaSharp.Extended.Iconify.Typicons\SkiaSharp.Extended.Iconify.Typicons.csproj", "{14A21586-B844-4955-9E17-90968EE71ABC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,5 +51,9 @@ Global
 		{14A21586-B844-4955-9E17-90968EE71FCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14A21586-B844-4955-9E17-90968EE71FCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14A21586-B844-4955-9E17-90968EE71FCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14A21586-B844-4955-9E17-90968EE71ABC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14A21586-B844-4955-9E17-90968EE71ABC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14A21586-B844-4955-9E17-90968EE71ABC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14A21586-B844-4955-9E17-90968EE71ABC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

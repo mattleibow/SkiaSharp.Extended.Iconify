@@ -24,6 +24,10 @@ var SimpleLineIconsVersion = "2.4.1";
 var SimpleLineIconsStyleUrl = string.Format("https://raw.githubusercontent.com/thesabbir/simple-line-icons/{0}/css/simple-line-icons.css", SimpleLineIconsVersion);
 var SimpleLineIconsFontUrl = string.Format("https://raw.githubusercontent.com/thesabbir/simple-line-icons/{0}/fonts/Simple-Line-Icons.ttf", SimpleLineIconsVersion);
 
+var TypiconsVersion = "2.0.9";
+var TypiconsStyleUrl = string.Format("https://raw.githubusercontent.com/stephenhutchings/typicons.font/v{0}/src/font/typicons.min.css", TypiconsVersion);
+var TypiconsFontUrl = string.Format("https://raw.githubusercontent.com/stephenhutchings/typicons.font/v{0}/src/font/typicons.ttf", TypiconsVersion);
+
 Task("Externals")
     .Does(() =>
 {
@@ -75,6 +79,13 @@ Task("Externals")
         DownloadFile(SimpleLineIconsStyleUrl, "./externals/SimpleLineIcons/simple-line-icons.css");
     if (!FileExists("./externals/SimpleLineIcons/Simple-Line-Icons.ttf"))
         DownloadFile(SimpleLineIconsFontUrl, "./externals/SimpleLineIcons/Simple-Line-Icons.ttf");
+
+    // Typicons
+    EnsureDirectoryExists("./externals/Typicons/");
+    if (!FileExists("./externals/Typicons/typicons.min.css"))
+        DownloadFile(TypiconsStyleUrl, "./externals/Typicons/typicons.min.css");
+    if (!FileExists("./externals/Typicons/typicons.ttf"))
+        DownloadFile(TypiconsFontUrl, "./externals/Typicons/typicons.ttf");
 });
 
 Task("Build")
@@ -110,6 +121,7 @@ Task("Build")
     GenerateIconifySource("externals/MaterialDesignIcons/materialdesignicons.min.css", "MaterialDesignIcons", "css");
     GenerateIconifySource("externals/MaterialIcons/codepoints", "MaterialIcons", "codepoints");
     GenerateIconifySource("externals/SimpleLineIcons/simple-line-icons.css", "SimpleLineIcons", "css");
+    GenerateIconifySource("externals/Typicons/typicons.min.css", "Typicons", "css");
 
     // now build the libraries
     NuGetRestore("./source/SkiaSharp.Extended.Iconify.sln");
@@ -124,6 +136,7 @@ Task("Build")
     CopyFileToDirectory("./source/SkiaSharp.Extended.Iconify.MaterialIcons/bin/Release/SkiaSharp.Extended.Iconify.MaterialIcons.dll", "./output/");
     CopyFileToDirectory("./source/SkiaSharp.Extended.Iconify.Meteocons/bin/Release/SkiaSharp.Extended.Iconify.Meteocons.dll", "./output/");
     CopyFileToDirectory("./source/SkiaSharp.Extended.Iconify.SimpleLineIcons/bin/Release/SkiaSharp.Extended.Iconify.SimpleLineIcons.dll", "./output/");
+    CopyFileToDirectory("./source/SkiaSharp.Extended.Iconify.Typicons/bin/Release/SkiaSharp.Extended.Iconify.Typicons.dll", "./output/");
 });
 
 Task("Clean")
