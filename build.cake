@@ -149,16 +149,21 @@ Task("Build")
     DotNetBuild("./source/SkiaSharp.Extended.Iconify.sln", settings => settings.SetConfiguration("Release"));
 
     // copy to output
-    EnsureDirectoryExists("./output/");
-    CopyFileToDirectory("./source/SkiaSharp.Extended.Iconify/bin/Release/SkiaSharp.Extended.Iconify.dll", "./output/");
-    CopyFileToDirectory("./source/SkiaSharp.Extended.Iconify.FontAwesome/bin/Release/SkiaSharp.Extended.Iconify.FontAwesome.dll", "./output/");
-    CopyFileToDirectory("./source/SkiaSharp.Extended.Iconify.IonIcons/bin/Release/SkiaSharp.Extended.Iconify.IonIcons.dll", "./output/");
-    CopyFileToDirectory("./source/SkiaSharp.Extended.Iconify.MaterialDesignIcons/bin/Release/SkiaSharp.Extended.Iconify.MaterialDesignIcons.dll", "./output/");
-    CopyFileToDirectory("./source/SkiaSharp.Extended.Iconify.MaterialIcons/bin/Release/SkiaSharp.Extended.Iconify.MaterialIcons.dll", "./output/");
-    CopyFileToDirectory("./source/SkiaSharp.Extended.Iconify.Meteocons/bin/Release/SkiaSharp.Extended.Iconify.Meteocons.dll", "./output/");
-    CopyFileToDirectory("./source/SkiaSharp.Extended.Iconify.SimpleLineIcons/bin/Release/SkiaSharp.Extended.Iconify.SimpleLineIcons.dll", "./output/");
-    CopyFileToDirectory("./source/SkiaSharp.Extended.Iconify.Typicons/bin/Release/SkiaSharp.Extended.Iconify.Typicons.dll", "./output/");
-    CopyFileToDirectory("./source/SkiaSharp.Extended.Iconify.WeatherIcons/bin/Release/SkiaSharp.Extended.Iconify.WeatherIcons.dll", "./output/");
+    EnsureDirectoryExists("./output/assemblies/");
+    CopyFiles("./source/SkiaSharp.Extended.Iconify/bin/Release/SkiaSharp.Extended.Iconify.dll", "./output/assemblies/");
+    CopyFiles("./source/SkiaSharp.Extended.Iconify.*/bin/Release/SkiaSharp.Extended.Iconify.*.dll", "./output/assemblies/");
+});
+
+Task("Package")
+    .IsDependentOn("Build")
+    .Does(() =>
+{
+    foreach (var nuspec in GetFiles("./nuget/*.nuspec")) {
+        NuGetPack (nuspec, new NuGetPackSettings { 
+            OutputDirectory = "./output/nuget",
+            BasePath = "./",
+        });
+    }
 });
 
 Task("Clean")
@@ -187,6 +192,7 @@ Task("Clean")
 });
 
 Task("Default")
-    .IsDependentOn("Build");
+    .IsDependentOn("Build")
+    .IsDependentOn("Package");
 
 RunTarget(target);
