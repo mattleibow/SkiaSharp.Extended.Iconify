@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -153,6 +154,8 @@ namespace {{inject-namespace}}
 
 		private static void ParseCssCodepoints(string cssPath, StringBuilder characters)
 		{
+			var keys = new Dictionary<string, string>();
+
 			var parser = new Parser();
 			var stylesheet = parser.Parse(File.ReadAllText(cssPath));
 			var rules = stylesheet.StyleRules;
@@ -189,8 +192,23 @@ namespace {{inject-namespace}}
 				// create the dictionary
 				foreach (var sel in selectors)
 				{
+					var key = sel.Substring(1, sel.Length - 7 - 1);
+					if (string.IsNullOrEmpty(key))
+					{
+						continue;
+					}
+					if (keys.ContainsKey(key))
+					{
+						if (!keys[key].Equals(content, StringComparison.OrdinalIgnoreCase))
+						{
+							Console.WriteLine($"Duplicate key found: '{key}' with value: '{content}'");
+						}
+						continue;
+					}
+					keys.Add(key, content);
+
 					var chars = CharacterTemplate
-						.Replace("{{inject-selector}}", sel.Substring(1, sel.Length - 7 - 1))
+						.Replace("{{inject-selector}}", key)
 						.Replace("{{inject-value}}", content);
 					characters.AppendLine(chars);
 				}
